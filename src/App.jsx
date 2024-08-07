@@ -4,6 +4,7 @@ import Routerlayout from "./layout"
 // import Home pages
 import Home from "./pages/home"
 import Login from "./pages/login"
+import Sign from "./pages/sign"
 
 const App = () => {
   const router = createBrowserRouter([
@@ -18,6 +19,10 @@ const App = () => {
         {
           path: "/login",
           element: <Login />
+        },
+        {
+          path: "/sign",
+          element: <Sign />
         }
       ]
     }

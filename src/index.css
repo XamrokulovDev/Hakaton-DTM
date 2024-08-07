@@ -5,14 +5,12 @@
 
 /* Container Styles  */
 .container {
-    width: 80vw;
+    width: 90vw;
     margin-left: auto;
     margin-right: auto;
 }
 
-/* Media Queries */
-@media (min-width: 0px) and (max-width: 768px) {
-    .container {
-        width: 90vw;
-    }
+/* shadow-input class style  */
+.shadow-input {
+    box-shadow: 2px 3px 20px #03336e5e;
 }
