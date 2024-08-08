@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+    overflow-x: hidden;
+}
 
 /* Container Styles  */
 .container {
@@ -13,4 +16,9 @@
 /* shadow-input class style  */
 .shadow-input {
     box-shadow: 2px 3px 20px #03336e5e;
+}
+
+/* shadow-please class style  */
+.shadow-please {
+    box-shadow: 2px 3px 10px #6b6b6b94;
 }

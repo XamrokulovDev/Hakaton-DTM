@@ -1,0 +1,1 @@
+export const url = "https://creativymindtest.pythonanywhere.com/api/v1/";

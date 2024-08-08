@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useDispatch, useSelector } from 'react-redux';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { getSign } from '../../Redux/signSlice';
 
 const Sign = () => {
   const [userData, setUserData] = useState({
     username: '',
-    email: '',
     password: '',
+    email: '',
     error: '',
   });
   const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { loading, error } = useSelector((state) => state.sign);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,13 +24,18 @@ const Sign = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const { username, email, password } = userData;
+    const { username, password, email } = userData;
     if (username === '' || email === '' || password === '') {
       setUserData((prevData) => ({
         ...prevData,
         error: 'Formani to\'liq to\'ldiring!',
+      }));
+    } else if (username === password) {
+      setUserData((prevData) => ({
+        ...prevData,
+        error: 'Bunaqa foydalanuvchi mavjud!',
       }));
     } else {
       setUserData((prevData) => ({
@@ -35,19 +44,38 @@ const Sign = () => {
       }));
       const formData = {
         username,
-        email,
         password,
+        email,
       };
-      console.log('Form Data:', formData);
 
-      // Navigate to the '/' route and clear form data
-      setUserData({
-        username: '',
-        email: '',
-        password: '',
-        error: '',
-      });
-      navigate('/'); // Redirect to '/'
+      try {
+        const resultAction = await dispatch(getSign(formData));
+        if (getSign.fulfilled.match(resultAction)) {
+          console.log('Registration successful:', resultAction.payload);
+          setUserData({
+            username: '',
+            password: '',
+            email: '',
+            error: '',
+          });
+          navigate('/login');
+        } else {
+          console.error('Failed to register:', resultAction.payload);
+          const errorMessage = typeof resultAction.payload === 'string' 
+            ? resultAction.payload 
+            : "Ro'yxatdan o'tishda xatolik yuz berdi!";
+          setUserData((prevData) => ({
+            ...prevData,
+            error: errorMessage,
+          }));
+        }
+      } catch (err) {
+        console.error('Failed to register:', err);
+        setUserData((prevData) => ({
+          ...prevData,
+          error: "Ushbu foydalanuvchi mavjud!",
+        }));
+      }
     }
   };
 
@@ -57,8 +85,8 @@ const Sign = () => {
 
   return (
     <div className="w-screen h-screen flex items-center justify-center max-sm:px-5">
-      <form onSubmit={handleSubmit} className="w-[500px] max-sm:w-full flex flex-col gap-6 rounded-lg shadow-input px-10 max-sm:px-5 py-5">
-        <h1 className="text-center text-3xl text-[#03346E] mb-2">Login</h1>
+      <form onSubmit={handleSubmit} className="w-[500px] max-sm:w-full flex flex-col gap-4 rounded-lg shadow-input px-10 max-sm:px-5 py-5">
+        <h1 className="text-center text-3xl text-[#03346E] mb-2">Ro'yxatdan o'tish</h1>
         <div className="border-b-2 border-[#03346E] p-1">
           <input 
             type="text" 
@@ -95,8 +123,11 @@ const Sign = () => {
           )}
         </div>
         {userData.error && <p className="text-red-500 text-center text-lg">{userData.error}</p>}
+        <p className='text-center text-[#03346E] text-lg'>Agar akkauntingiz bo'lsa <NavLink to={"/login"} className="underline">Kirish</NavLink></p>
         <div className="flex justify-center">
-          <button type="submit" className="bg-[#03346E] text-[#FFF] text-lg px-16 py-2 rounded-md">Sign In</button>
+          <button type="submit" className="bg-[#03346E] text-[#FFF] text-lg px-8 py-2 rounded-md" disabled={loading}>
+            {loading ? 'Loading...' : "Ro'yxatdan o'tish"}
+          </button>
         </div>
       </form>
     </div>

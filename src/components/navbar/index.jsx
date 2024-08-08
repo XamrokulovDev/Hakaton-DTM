@@ -1,8 +1,12 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Spin as Hamburger } from 'hamburger-react';
-import { IoCaretDown, IoCaretUpOutline } from "react-icons/io5";
 import { NavLink } from 'react-router-dom';
+// import framer-motion 
+import { motion } from 'framer-motion';
+// import Hamburger 
+import { Spin as Hamburger } from 'hamburger-react';
+// import icons 
+import { IoCaretDown, IoCaretUpOutline } from "react-icons/io5";
+import { PiUserCircleLight } from "react-icons/pi";
 
 const Navbar = () => {
     const [isOpen, setOpen] = useState(false);
@@ -59,13 +63,23 @@ const Navbar = () => {
                     </div>
                 </div>
             </nav>
-            <nav className="bg-[#FFF] py-4 max-md:block hidden">
+            <nav className="w-full fixed top-0 left-0 z-50 bg-[#FFF] py-3 max-md:block hidden border">
                 <div className="container mx-auto flex items-center justify-between">
                     <div className="logo">
-                        <h1>Logo</h1>
+                        <NavLink to={"/"} className="text-3xl text-[#03346E]">Logo</NavLink>
                     </div>
-                    <div className="toggle">
+                    <ul className={`w-full absolute top-full flex flex-col gap-2 bg-[#FFF] shadow-md p-2 transition-all duration-300 ${isOpen ? "left-0" : "left-full"}`}>
+                        <li className='flex justify-center'><NavLink to={"/junior"} className={"text-lg text-[#03346E] font-medium"}>Junior</NavLink></li>
+                        <li className='flex justify-center'><NavLink to={"/middle"} className={"text-lg text-[#03346E] font-medium"}>Middle</NavLink></li>
+                        <li className='flex justify-center'><NavLink to={"/senior"} className={"text-lg text-[#03346E] font-medium"}>Senior</NavLink></li>
+                    </ul>
+                    <div className="flex items-center gap-2">
+                      <div className="toggle text-[#03346E]">
                         <Hamburger toggled={isOpen} toggle={setOpen} />
+                      </div>
+                      <NavLink to={"/sign"}>
+                        <PiUserCircleLight className='text-4xl text-[#03346E]'/>
+                      </NavLink>
                     </div>
                 </div>
             </nav>

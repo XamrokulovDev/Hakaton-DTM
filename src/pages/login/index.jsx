@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // import useNavigate
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../../Redux/loginSlice';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 const Login = () => {
@@ -9,7 +11,8 @@ const Login = () => {
     error: '',
   });
   const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate(); // initialize useNavigate
+  const dispatch = useDispatch(); 
+  const navigate = useNavigate(); 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,19 +35,17 @@ const Login = () => {
         ...prevData,
         error: '',
       }));
-      const formData = {
-        username,
-        password,
-      };
-      console.log('Form Data:', formData);
-      // Clear input fields
-      setUserData({
-        username: '',
-        password: '',
-        error: '',
-      });
-      // Redirect to the home page
-      navigate('/');
+      dispatch(loginUser({ username, password }))
+        .unwrap()
+        .then(() => {
+          navigate('/');
+        })
+        .catch((error) => {
+          setUserData((prevData) => ({
+            ...prevData,
+            error: error.message || 'Login qilishda xatolik yuz berdi!',
+          }));
+        });
     }
   };
 
@@ -82,8 +83,9 @@ const Login = () => {
           )}
         </div>
         {userData.error && <p className="text-red-500 text-center text-lg">{userData.error}</p>}
+        <p className='text-center text-[#03346E] text-lg'><NavLink to={"/sign"} className={"underline"}>Ro'yxatdan o'tish</NavLink> oynasiga o'tish</p>
         <div className="flex justify-center">
-          <button type="submit" className="bg-[#03346E] text-[#FFF] text-lg px-16 py-2 rounded-md">Login</button>
+          <button type="submit" className="bg-[#03346E] text-[#FFF] text-xl px-16 py-2 rounded-md">Login</button>
         </div>
       </form>
     </div>

@@ -5,6 +5,9 @@ import Routerlayout from "./layout"
 import Home from "./pages/home"
 import Login from "./pages/login"
 import Sign from "./pages/sign"
+import JuniorPage from "./pages/junior"
+import MiddlePage from "./pages/middle"
+import SeniorPage from "./pages/senior"
 
 const App = () => {
   const router = createBrowserRouter([
@@ -23,6 +26,18 @@ const App = () => {
         {
           path: "/sign",
           element: <Sign />
+        },
+        {
+          path: "/junior",
+          element: <JuniorPage />
+        },
+        {
+          path: "/middle",
+          element: <MiddlePage />
+        },
+        {
+          path: "/senior",
+          element: <SeniorPage />
         }
       ]
     }
