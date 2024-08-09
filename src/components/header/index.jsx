@@ -6,7 +6,7 @@ import { SlBookOpen } from "react-icons/sl";
 
 const Header = () => {
   return (
-    <header className='container flex items-center mt-44 mb-24'>
+    <div className='container flex items-center my-20'>
       <div className="grid grid-cols-3 gap-10 max-md:grid-cols-1 max-xl:grid-cols-2">
         {
           headerData.map((item,index)=>(
@@ -25,8 +25,8 @@ const Header = () => {
           ))
         }
       </div>
-    </header>
+    </div>
   )
 }
 
-export default Header
+export default Header;

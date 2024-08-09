@@ -117,9 +117,9 @@ const Sign = () => {
             onChange={handleChange}
           />
           {showPassword ? (
-            <FaRegEyeSlash className='text-xl cursor-pointer absolute top-2.5 right-0' onClick={togglePasswordVisibility}/>
-          ) : (
             <FaRegEye className='text-xl cursor-pointer absolute top-2.5 right-0' onClick={togglePasswordVisibility}/>
+          ) : (
+          <FaRegEyeSlash className='text-xl cursor-pointer absolute top-2.5 right-0' onClick={togglePasswordVisibility}/>
           )}
         </div>
         {userData.error && <p className="text-red-500 text-center text-lg">{userData.error}</p>}

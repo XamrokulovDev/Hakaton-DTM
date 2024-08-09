@@ -7,6 +7,7 @@ import { Spin as Hamburger } from 'hamburger-react';
 // import icons 
 import { IoCaretDown, IoCaretUpOutline } from "react-icons/io5";
 import { PiUserCircleLight } from "react-icons/pi";
+import logo from '../../assets/logo.jpg'
 
 const Navbar = () => {
     const [isOpen, setOpen] = useState(false);
@@ -18,11 +19,13 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className="w-full fixed top-0 left-0 z-50 bg-[#FFF] py-4 max-md:hidden">
+            <nav className="w-full fixed top-0 left-0 z-50 bg-[#FFF] py-1 max-md:hidden navbar-shadow">
                 <div className="container mx-auto flex items-center justify-between">
                     <div className="flex items-center gap-20">
                         <div className="logo">
-                            <NavLink to={"/"} className='text-[#03346E] text-3xl'>LOGO</NavLink>
+                            <NavLink to={"/"} className='text-[#03346E] text-3xl'>
+                                <img src={logo} alt="" className='w-[100px] h-[100px]'/>
+                            </NavLink>
                         </div>
                         <div className="flex items-center gap-1 cursor-pointer relative" onClick={handleTestClick}>
                             <p className='text-lg font-medium text-[#03346E] mt-1'>Test topshirish</p>
@@ -51,7 +54,6 @@ const Navbar = () => {
                                 </motion.div>
                             )}
                         </div>
-                        <div className="w-full px-36 absolute top-full left-0 border"></div>
                     </div>
                     <div className="flex items-center gap-4 relative">
                         <NavLink to={"/sign"}>
@@ -63,10 +65,12 @@ const Navbar = () => {
                     </div>
                 </div>
             </nav>
-            <nav className="w-full fixed top-0 left-0 z-50 bg-[#FFF] py-3 max-md:block hidden border">
+            <nav className="w-full fixed top-0 left-0 z-50 bg-[#FFF] py-3 max-md:block hidden navbar-shadow">
                 <div className="container mx-auto flex items-center justify-between">
                     <div className="logo">
-                        <NavLink to={"/"} className="text-3xl text-[#03346E]">Logo</NavLink>
+                        <NavLink to={"/"} className="text-3xl text-[#03346E]">
+                            <img src={logo} alt="" className='w-[100px] h-[100px]'/>
+                        </NavLink>
                     </div>
                     <ul className={`w-full absolute top-full flex flex-col gap-2 bg-[#FFF] shadow-md p-2 transition-all duration-300 ${isOpen ? "left-0" : "left-full"}`}>
                         <li className='flex justify-center'><NavLink to={"/junior"} className={"text-lg text-[#03346E] font-medium"}>Junior</NavLink></li>

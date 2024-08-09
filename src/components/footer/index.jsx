@@ -3,6 +3,8 @@ import { BsTelegram } from "react-icons/bs";
 import { RiInstagramFill } from "react-icons/ri";
 import { FaPhone } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
+// import image 
+import logo from "../../assets/django.png"
 
 const Footer = () => {
   const year = new Date().getFullYear()
@@ -10,7 +12,9 @@ const Footer = () => {
     <footer className="bg-[#03346E]">
       <div className="container flex justify-between items-start gap-5 max-sm:flex-col max-sm:gap-10 py-5">
         <div className="flex flex-col gap-6">
-          <h1 className="text-3xl text-[#FFF] font-medium">Logo</h1>
+          <NavLink to={"/"}>
+            <img src={logo} alt="" />
+          </NavLink>
           <span className="flex items-center gap-5">
             <a href="https://t.me/DjangoAcademy" target="_blank" className="text-[#FFF] text-2xl"><BsTelegram /></a>
             <a href="https://www.instagram.com/django_academy" target="_blank" className="text-[#FFF] text-2xl"><RiInstagramFill /></a>
@@ -18,13 +22,13 @@ const Footer = () => {
           </span>
         </div>
         <div className="flex flex-col gap-3">
-          <NavLink to={"/"} className={"text-lg text-[#FFF] font-medium"}>Bosh sahifa</NavLink>
-          <NavLink to={"/"} className={"text-lg text-[#FFF] font-medium"}>Testdan o'tish</NavLink>
-          <NavLink to={"/sign"} className={"text-lg text-[#FFF] font-medium"}>Ro'yxatdan o'tish</NavLink>
+          <NavLink to={"/"} className={"text-lg text-[#FFF]"}>Bosh sahifa</NavLink>
+          <NavLink to={"/"} className={"text-lg text-[#FFF]"}>Testdan o'tish</NavLink>
+          <NavLink to={"/sign"} className={"text-lg text-[#FFF]"}>Ro'yxatdan o'tish</NavLink>
         </div>
-        <div className="flex flex-col items-start gap-3">
-          <p className="text-md text-[#FFF] font-medium">djangoacademy@gmail.com</p>
-          <p className="w-[185px] text-md text-[#FFF]"><span className="font-medium">Manzil:</span> Toshkent shahar, Algoritm, Diydor ko'chasi, 71-uy</p>
+        <div className="flex flex-col items-start gap-4">
+          <p className="w-[230px] text-md text-[#FFF]"><span className="font-medium">Manzil:</span> Toshkent shahar, Algoritm, Diydor ko'chasi, 71-uy</p>
+          <p className="text-lg text-[#FFF]">djangoacademy@gmail.com</p>
           <p></p>
         </div>
       </div>

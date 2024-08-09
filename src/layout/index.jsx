@@ -1,23 +1,22 @@
-import { useLocation } from "react-router-dom";
-// import Navbar 
-import Navbar from "../components/navbar"
-// import Footer 
-import Footer from "../components/footer"
-import { Outlet } from "react-router-dom"
+import { useEffect, useState } from "react";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import Navbar from "../components/navbar";
+import Footer from "../components/footer";
 
 const Routerlayout = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const hideHeaderFooter = location.pathname === '/login' || location.pathname === '/sign';
 
   return (
-    <header>
+    <header className="relative">
       {!hideHeaderFooter && <Navbar />}
-      <div>
+      <div className="">
         <Outlet />
       </div>
       {!hideHeaderFooter && <Footer />}
     </header>
-  )
+  );
 }
 
-export default Routerlayout
+export default Routerlayout;

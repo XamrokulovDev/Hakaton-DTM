@@ -13,6 +13,11 @@ html {
     margin-right: auto;
 }
 
+/* navbar-shadow style */
+.navbar-shadow {
+    box-shadow: 2px 3px 10px #c9c9c946;
+}
+
 /* shadow-input class style  */
 .shadow-input {
     box-shadow: 2px 3px 20px #03336e5e;
@@ -20,5 +25,17 @@ html {
 
 /* shadow-please class style  */
 .shadow-please {
-    box-shadow: 2px 3px 10px #6b6b6b94;
+    transition: all 0.3s linear;
+    box-shadow: 1px 1px 10px #b7b7b75f;
+}
+
+.shadow-please:hover {
+    transform: translateY(-10px);
+    box-shadow: 2px 3px 20px #6b6b6b69;
+}
+
+/* shadow-tests class style */
+.shadow-tests {
+    transition: all 0.3s linear;
+    box-shadow: 0 0 10px #c8c8c875;
 }

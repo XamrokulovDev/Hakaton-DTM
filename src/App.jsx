@@ -9,42 +9,23 @@ import JuniorPage from "./pages/junior"
 import MiddlePage from "./pages/middle"
 import SeniorPage from "./pages/senior"
 
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Routerlayout />,
+    children: [
+      { index: true, element: <Home /> },
+      { path: "/login", element: <Login /> },
+      { path: "/sign", element: <Sign /> },
+      { path: "/junior", element: <JuniorPage /> },
+      { path: "/middle", element: <MiddlePage /> },
+      { path: "/senior", element: <SeniorPage /> }
+    ]
+  }
+]);
+
 const App = () => {
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Routerlayout />,
-      children:[
-        {
-          index: true,
-          element: <Home />
-        },
-        {
-          path: "/login",
-          element: <Login />
-        },
-        {
-          path: "/sign",
-          element: <Sign />
-        },
-        {
-          path: "/junior",
-          element: <JuniorPage />
-        },
-        {
-          path: "/middle",
-          element: <MiddlePage />
-        },
-        {
-          path: "/senior",
-          element: <SeniorPage />
-        }
-      ]
-    }
-  ])
-  return (
-    <RouterProvider router={router} />
-  )
+  return <RouterProvider router={router} />;
 }
 
-export default App
+export default App;

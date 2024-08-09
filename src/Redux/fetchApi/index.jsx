@@ -1,48 +1,46 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { url } from '../../api';
 
-const api = `${url}test/bolims/1/`;
+const api = `https://2jamoa.pythonanywhere.com/api/v1/test/bolim/`;
+// local storage dan tokenni olish 
+const token = localStorage.getItem('token');
 
-export const fetchTestSections = createAsyncThunk(
-  'fetch/fetchTestSections',
-  async (_, { rejectWithValue }) => {
-    try {
-      const token = localStorage.getItem('token');
-      const response = await axios.get(api, {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(error.response ? error.response.data : error.message);
-    }
-  }
-);
-
-const fetchSlice = createSlice({
-  name: 'fetch',
-  initialState: {
-    sections: [],
-    status: 'idle',
-    error: null
-  },
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchTestSections.pending, (state) => {
-        state.status = 'loading';
-      })
-      .addCase(fetchTestSections.fulfilled, (state, action) => {
-        state.status = 'succeeded';
-        state.sections = action.payload;
-      })
-      .addCase(fetchTestSections.rejected, (state, action) => {
-        state.status = 'failed';
-        state.error = action.payload;
-      });
-  }
-});
-
-export default fetchSlice.reducer;
+const axiosInstance = axios.create({
+    baseURL: api,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  
+  export const fetchApi = createAsyncThunk('fetch/fetchApi', async () => {
+    const response = await axiosInstance.get('');
+    console.log('API Response:', response.data);
+    return response.data;
+    console.log(response.data)
+  });
+  
+  const fetchSlice = createSlice({
+    name: 'api',
+    initialState: {
+      api: [],
+      status: 'idle',
+      error: null,
+    },
+    reducers: {},
+    extraReducers: (builder) => {
+      builder
+        .addCase(fetchApi.pending, (state) => {
+          state.status = 'loading';
+        })
+        .addCase(fetchApi.fulfilled, (state, action) => {
+          state.status = 'succeeded';
+          state.api = Array.isArray(action.payload) ? action.payload : [];
+        })
+        .addCase(fetchApi.rejected, (state, action) => {
+          state.status = 'failed';
+          state.error = action.error.message;
+        });
+    },
+  });
+  
+  export default fetchSlice.reducer;

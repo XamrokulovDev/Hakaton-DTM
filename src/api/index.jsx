@@ -1,1 +1,1 @@
-export const url = "https://creativymindtest.pythonanywhere.com/api/v1/";
+export const url = "https://2jamoa.pythonanywhere.com/api/v1/";
